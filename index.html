@@ -1,0 +1,1856 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DwxType</title>
+    <meta name="description"
+        content="Enhance your typing skills with DolphinType - a premier platform for keyboard typing. Compete on our leaderboard and elevate your typing proficiency.">
+    <meta name="keywords" content="DolphinType, typing, keyboard skills, leaderboard, typing practice">
+    <meta name="author" content="Muhammadali Shukrulloyev">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="logo2.svg" type="image/x-icon">
+    <link rel="stylesheet" href="style.css?v=1701090177">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YW0141QFFM"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-YW0141QFFM');
+    </script>
+</head>
+
+<body style="background-color: rgb(248, 249, 250) !important;">
+
+    <!-- Spinner Start -->
+
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Spinner End -->
+
+    <!-- Caps lock -->
+    <div class="position-absolute top-0 bg-warning d-none text-dark p-4 rounded top-def shadow-sm start-50 translate-middle"
+        id="capsWarning">
+        <i class="fa-solid fa-lock d-flex gap-2"><span>Caps Lock</span></i>
+    </div>
+    <!-- Caps lock end -->
+
+    <!-- navbar -->
+        <!-- navbar end -->
+
+    <!-- result -->
+            <div class="alert alert-warning" role="alert">
+            Natijalaringizni saqlash uchun ro'yxatdan o'ting!
+            <a href="signin.php">ro'yxatdan o'tish</a>
+        </div>
+        <!-- result end -->
+
+    <!-- section-1 -->
+    <section>
+        <div class="container mt-5 mb-5">
+            <div class="part1">
+                <div class="resBox rounded lth">
+                    <p class="resBoxHead m-0 bg-primary text-light rounded-top p-2 px-3">
+                        Result
+                    </p>
+                    <div class="rbResult p-3 text-center">
+                        <p class='text-success m-0 h1' title="5 letters = 1 word">
+                            <span id="resWPM">0</span>
+                            <select id="modeOfSpeed">
+                                <option value="wpm">WPM</option>
+                                <option value="cpm">CPM</option>
+                            </select>
+                        </p>
+                        <p class="text-secondary m-0 h6 mt-2" id="typeOfSpeed">(words per minute)</p>
+                    </div>
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td>Accuracy</td>
+                                <th><span id="resAcc">100</span>%</th>
+                            </tr>
+                            <tr>
+                                <td>Speed</td>
+                                <th><span id="resTime">10</span> second</th>
+                            </tr>
+                            <tr>
+                                <td>Correct words</td>
+                                <th class="text-success"><span id="resCor">10</span></td>
+                            </tr>
+                            <tr>
+                                <td>Wrong words</td>
+                                <th class="text-danger"><span id="resErr">0</span></th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div style="max-width: 300px; margin: 0 auto;">
+
+                    <label for="group" class="mb-2">Tanlang yoki <a
+                            href="signup.php">qo'shiling</a></label>
+                    <select class="selectpicker form-select mb-5" id="group" name="group">
+                                                    <optgroup label="mode">
+                                                                        <option value="12" selected>
+                                            Normal (1-min)                                        </option>
+                                                                            <option value="13" >
+                                            30-seconds                                        </option>
+                                                                            <option value="14" >
+                                            15-seconds                                        </option>
+                                                                </optgroup>
+                                            </select>
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                        aria-valuemin="0" aria-valuemax="100" id="donePercent" style="width: 0%;"></div>
+                </div>
+                <p class="text">
+                    Loading...
+                </p>
+
+                <form class="f">
+                    <input autofocus type="text" id="inputT" autocomplete="off" autocapitalize="off">
+                    <input tabindex="-1" type="button" class="timer" value="00:00">
+                    <button tabindex="0" type="submit">
+                        <i class="fa-solid fa-rotate-right"></i>
+                    </button>
+                </form>
+            </div>
+            <hr style="opacity: 10%;height: 2px;margin-top: 5rem;">
+        </div>
+    </section>
+    <!-- section-1 end -->
+
+    <!-- leaderboard -->
+    <div class="container mb-5">
+        <h3 class="leaderboard" style="white-space: wrap;">
+            Leaderboard:
+            <small class="text-muted">
+                Normal (1-min)            </small>
+        </h3>
+        <div class="table-responsive">
+            <table class="table table-striped mt-3 table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col" width="60"></th>
+                        <th scope="col" width="10"></th>
+                        <th scope="col">Username</th>
+                        <th scope="col">speed</th>
+                        <th scope="col">accuracy</th>
+                        <th scope="col">time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                                            <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                            <i class="fas fa-medal" style="color: #FFD700;"></i>
+                                                                        1                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img39838.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                ejotov_daler                            </td>
+                            <td>
+                                133 wpm
+                            </td>
+                            <td>
+                                95 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                            <i class="fas fa-medal" style="color: #C0C0C0;"></i>
+                                                                        2                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img54958.png">
+                                </div>
+                            </td>
+                            <td>
+                                Ergashev Aziz:)                            </td>
+                            <td>
+                                119 wpm
+                            </td>
+                            <td>
+                                93 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                            <i class="fas fa-medal" style="color: #FF5733;"></i>
+                                                                        3                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img91359.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                itachi_v1p                            </td>
+                            <td>
+                                94 wpm
+                            </td>
+                            <td>
+                                98 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        4                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img97227.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                diyor_yodgorov                            </td>
+                            <td>
+                                68 wpm
+                            </td>
+                            <td>
+                                100 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        5                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img87027.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                Salohiddin-Abruyev                            </td>
+                            <td>
+                                63 wpm
+                            </td>
+                            <td>
+                                97 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        6                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img74643.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                sayodov_lazizjon                            </td>
+                            <td>
+                                62 wpm
+                            </td>
+                            <td>
+                                98 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        7                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img97756.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                xonbozorov                            </td>
+                            <td>
+                                59 wpm
+                            </td>
+                            <td>
+                                98 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        8                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img41939.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                lite_itachi2                            </td>
+                            <td>
+                                58 wpm
+                            </td>
+                            <td>
+                                100 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        9                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img18933.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                Noila                            </td>
+                            <td>
+                                55 wpm
+                            </td>
+                            <td>
+                                96 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        10                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img96828.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                shoxja.com                            </td>
+                            <td>
+                                53 wpm
+                            </td>
+                            <td>
+                                98 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        11                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img38343.png">
+                                </div>
+                            </td>
+                            <td>
+                                nurmatovdilshod668@gmail.com                            </td>
+                            <td>
+                                52 wpm
+                            </td>
+                            <td>
+                                94 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        12                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img82736.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                shaxzod                            </td>
+                            <td>
+                                48 wpm
+                            </td>
+                            <td>
+                                100 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        13                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img49847.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                diyorbek_ravshanqulov                            </td>
+                            <td>
+                                48 wpm
+                            </td>
+                            <td>
+                                98 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        14                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img79202.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                shokh711                            </td>
+                            <td>
+                                48 wpm
+                            </td>
+                            <td>
+                                96 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        15                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img42848.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                Behruz Adashev                            </td>
+                            <td>
+                                47 wpm
+                            </td>
+                            <td>
+                                96 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        16                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img76312.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                Azimchik                            </td>
+                            <td>
+                                47 wpm
+                            </td>
+                            <td>
+                                84 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        17                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img75626.jpeg">
+                                </div>
+                            </td>
+                            <td>
+                                Daler23                            </td>
+                            <td>
+                                45 wpm
+                            </td>
+                            <td>
+                                98 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        18                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img15149.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                sanakulovme                            </td>
+                            <td>
+                                44 wpm
+                            </td>
+                            <td>
+                                86 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        19                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img17258.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                lazizjon                            </td>
+                            <td>
+                                43 wpm
+                            </td>
+                            <td>
+                                98 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        20                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img77344.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                Samadev                            </td>
+                            <td>
+                                40 wpm
+                            </td>
+                            <td>
+                                93 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        21                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img40309.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                Raykhona27                             </td>
+                            <td>
+                                39 wpm
+                            </td>
+                            <td>
+                                97 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        22                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img69232.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                milesmorals2023@gmail.com                            </td>
+                            <td>
+                                39 wpm
+                            </td>
+                            <td>
+                                92 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        23                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img67752.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                Nicceko                            </td>
+                            <td>
+                                38 wpm
+                            </td>
+                            <td>
+                                97 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        24                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img19017.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                ako1                            </td>
+                            <td>
+                                38 wpm
+                            </td>
+                            <td>
+                                95 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        25                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img81249.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                Abduraximov                            </td>
+                            <td>
+                                36 wpm
+                            </td>
+                            <td>
+                                97 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        26                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img43756.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                khushnud                            </td>
+                            <td>
+                                35 wpm
+                            </td>
+                            <td>
+                                100 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        27                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img47004.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                taxmina007                            </td>
+                            <td>
+                                35 wpm
+                            </td>
+                            <td>
+                                97 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        28                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img55536.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                usmonjon                            </td>
+                            <td>
+                                35 wpm
+                            </td>
+                            <td>
+                                97 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        29                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img20225.png">
+                                </div>
+                            </td>
+                            <td>
+                                testuchun                            </td>
+                            <td>
+                                33 wpm
+                            </td>
+                            <td>
+                                97 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        30                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img14942.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                R_                            </td>
+                            <td>
+                                33 wpm
+                            </td>
+                            <td>
+                                91 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        31                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img59116.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                F4                            </td>
+                            <td>
+                                32 wpm
+                            </td>
+                            <td>
+                                100 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        32                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img79315.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                AMIR_x7                            </td>
+                            <td>
+                                32 wpm
+                            </td>
+                            <td>
+                                100 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        33                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img55408.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                11111111dd                            </td>
+                            <td>
+                                32 wpm
+                            </td>
+                            <td>
+                                97 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        34                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img59237.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                nardo27                            </td>
+                            <td>
+                                32 wpm
+                            </td>
+                            <td>
+                                97 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        35                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img11339.png">
+                                </div>
+                            </td>
+                            <td>
+                                sasuke007                            </td>
+                            <td>
+                                31 wpm
+                            </td>
+                            <td>
+                                100 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        36                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img12403.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                DiyorbebWeb                            </td>
+                            <td>
+                                30 wpm
+                            </td>
+                            <td>
+                                100 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        37                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img50812.png">
+                                </div>
+                            </td>
+                            <td>
+                                akobir                            </td>
+                            <td>
+                                30 wpm
+                            </td>
+                            <td>
+                                97 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        38                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img34203.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                2007                            </td>
+                            <td>
+                                30 wpm
+                            </td>
+                            <td>
+                                93 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        39                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img37828.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                umar togojon                            </td>
+                            <td>
+                                29 wpm
+                            </td>
+                            <td>
+                                100 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        40                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img92758.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                jaga                            </td>
+                            <td>
+                                29 wpm
+                            </td>
+                            <td>
+                                100 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        41                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img29017.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                anu1shervon                            </td>
+                            <td>
+                                29 wpm
+                            </td>
+                            <td>
+                                100 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        42                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img61918.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                3333333ddd                            </td>
+                            <td>
+                                29 wpm
+                            </td>
+                            <td>
+                                97 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        43                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img77509.jpeg">
+                                </div>
+                            </td>
+                            <td>
+                                tokyo1                            </td>
+                            <td>
+                                28 wpm
+                            </td>
+                            <td>
+                                100 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        44                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img19302.png">
+                                </div>
+                            </td>
+                            <td>
+                                Diyorbek_23                            </td>
+                            <td>
+                                27 wpm
+                            </td>
+                            <td>
+                                96 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        45                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img46706.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                Diyorbek2010                            </td>
+                            <td>
+                                26 wpm
+                            </td>
+                            <td>
+                                96 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        46                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img50249.png">
+                                </div>
+                            </td>
+                            <td>
+                                @azizceek__007                            </td>
+                            <td>
+                                24 wpm
+                            </td>
+                            <td>
+                                100 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        47                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img35922.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                1234567                            </td>
+                            <td>
+                                24 wpm
+                            </td>
+                            <td>
+                                100 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        48                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img18551.png">
+                                </div>
+                            </td>
+                            <td>
+                                tezlik                            </td>
+                            <td>
+                                24 wpm
+                            </td>
+                            <td>
+                                92 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        49                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img10737.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                Shax990                            </td>
+                            <td>
+                                23 wpm
+                            </td>
+                            <td>
+                                100 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        50                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img64829.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                axrorovshoxjaxon43@gmail.com                            </td>
+                            <td>
+                                22 wpm
+                            </td>
+                            <td>
+                                100 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        51                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img14054.png">
+                                </div>
+                            </td>
+                            <td>
+                                maseevfarshed470@gmail.com                            </td>
+                            <td>
+                                22 wpm
+                            </td>
+                            <td>
+                                96 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        52                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img41153.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                Jxujf                            </td>
+                            <td>
+                                22 wpm
+                            </td>
+                            <td>
+                                82 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        53                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img59934.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                Husen                            </td>
+                            <td>
+                                21 wpm
+                            </td>
+                            <td>
+                                95 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        54                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img31450.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                maseevfarshed@gmail.com                            </td>
+                            <td>
+                                21 wpm
+                            </td>
+                            <td>
+                                95 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        55                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img37442.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                afzalshoh260@gmail.com                            </td>
+                            <td>
+                                18 wpm
+                            </td>
+                            <td>
+                                100 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        56                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img23236.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                parviz                            </td>
+                            <td>
+                                17 wpm
+                            </td>
+                            <td>
+                                100 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        57                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img65932.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                shoxjaxon                            </td>
+                            <td>
+                                17 wpm
+                            </td>
+                            <td>
+                                94 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        58                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img94955.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                Abdiyev_1995                            </td>
+                            <td>
+                                16 wpm
+                            </td>
+                            <td>
+                                100 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        59                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img51946.png">
+                                </div>
+                            </td>
+                            <td>
+                                Azizbek Haydarov                            </td>
+                            <td>
+                                15 wpm
+                            </td>
+                            <td>
+                                100 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        60                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img62046.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                2525152116                            </td>
+                            <td>
+                                14 wpm
+                            </td>
+                            <td>
+                                100 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        61                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img23312.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                sardor2012                            </td>
+                            <td>
+                                14 wpm
+                            </td>
+                            <td>
+                                93 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                                <tr>
+                            <th>
+                                <div class="d-flex align-items-center gap-1 justify-content-center">
+                                                                        62                                </div>
+                            </th>
+                            <td align="right">
+                                <div class="user_img">
+                                    <img oncontextmenu="return false" src="assets/user_img/img85803.jpg">
+                                </div>
+                            </td>
+                            <td>
+                                Parviz 999                            </td>
+                            <td>
+                                13 wpm
+                            </td>
+                            <td>
+                                100 %
+                            </td>
+                            <td>
+                                60 sec
+                            </td>
+                        </tr>
+                                        </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- leaderboard end -->
+
+    <!-- footer -->
+    <footer class="text-body-secondary py-3 bg-white">
+        <div class="container">
+            <p class="float-end mb-1">
+                Developer
+                <a href="">Ejotov_Daler</a>
+            </p>
+            <p class="mb-1">Inspired by <a href="https://10fastfingers.com/">10fastfingers.com</a></p>
+        </div>
+    </footer>
+    <!-- footer end -->
+
+    <script>
+        const input = document.getElementById('inputT'),
+            textBox = document.querySelector('.text'),
+            timerB = document.querySelector('input.timer'),
+            resNum = document.querySelector('#resWPM'),
+            resAcc = document.querySelector('#resAcc'),
+            resTime = document.querySelector('#resTime'),
+            resCor = document.querySelector('#resCor'),
+            resErr = document.querySelector('#resErr'),
+            modeOfSpeed = document.getElementById("modeOfSpeed"),
+            typeOfSpeed = document.getElementById("typeOfSpeed"),
+            resBox = document.querySelector(".resBox"),
+            group = document.getElementById('group'),
+            formF = document.querySelector('.f'),
+            capsWarning = document.getElementById('capsWarning'),
+            progressAsBtn = document.querySelector('.progress'),
+            showDonePercent = document.getElementById('donePercent');
+
+        // progress
+        var progressOn = true;
+        timerB.addEventListener('click', () => {
+            progressAsBtn.style.opacity = (progressOn) ? '0' : '1';
+            progressOn = !progressOn;
+        })
+        // end progress
+
+        // spinner
+        var isCurLoading = false;
+        window.addEventListener('load', () => {
+            $('#spinner').removeClass('show');
+        });
+        window.addEventListener('beforeunload', () => {
+            $('#spinner').addClass('show');
+            isCurLoading = true;
+        });
+        // end spinner
+
+        const wordsForTextBox = ["the", "be", "of", "and", "a", "to", "in", "he", "have", "it", "that", "for", "they", "with", "as", "not", "on", "she", "at", "by", "this", "we", "you", "do", "but", "from", "or", "which", "one", "would", "all", "will", "there", "say", "who", "make", "when", "can", "more", "if", "no", "man", "out", "other", "so", "what", "time", "up", "go", "about", "than", "into", "could", "state", "only", "new", "year", "some", "take", "come", "these", "know", "see", "use", "get", "like", "then", "first", "any", "work", "now", "may", "such", "give", "over", "think", "most", "even", "find", "day", "also", "after", "way", "many", "must", "look", "before", "great", "back", "through", "long", "where", "much", "should", "well", "people", "down", "own", "just", "because", "good", "each", "those", "feel", "seem", "how", "high", "too", "place", "little", "world", "very", "still", "nation", "hand", "old", "life", "tell", "write", "become", "here", "show", "house", "both", "between", "need", "mean", "call", "develop", "under", "last", "right", "move", "thing", "general", "school", "never", "same", "another", "begin", "while", "number", "part", "turn", "real", "leave", "might", "want", "point", "form", "off", "child", "few", "small", "since", "against", "ask", "late", "home", "interest", "large", "person", "end", "open", "public", "follow", "during", "present", "without", "again", "hold", "govern", "around", "possible", "head", "consider", "word", "program", "problem", "however", "lead", "system", "set", "order", "eye", "plan", "run", "keep", "face", "fact", "group", "play", "stand", "increase", "early", "course", "change", "help", "line"];
+
+        //
+        let random = 1,
+            groupId = 12,
+            isNotRandom = !random && groupId != 1,
+            newText = [],
+            textFromP = '',
+            inputText = [],
+            timeEnd = 60,
+            started = false,
+            finished = false,
+            timerInterval,
+            lastRandomNumber = null,
+            donePercent = 0,
+            resultWPM = 0,
+            accuracy;
+
+        updateTest();
+
+        // modeOfSpeed
+        modeOfSpeed.addEventListener('change', (e) => {
+            switch (e.target.value) {
+                case 'wpm':
+                    resNum.textContent = resultWPM;
+                    typeOfSpeed.textContent = '(words per minute)';
+                    break
+                case 'cpm':
+                    resNum.textContent = resultWPM * 5;
+                    typeOfSpeed.textContent = '(characters per minute)';
+                    break
+                default:
+                    resNum.textContent = resultWPM;
+            }
+
+        })
+        // end modeOfSpeed
+
+        // update when submits
+
+        formF.addEventListener('submit', (e) => {
+            e.preventDefault();
+            writePercent(0);
+            clearInterval(timerInterval);
+            textBox.innerHTML = "Loading...";
+            updateTest();
+            input.value = "";
+            input.focus();
+        })
+
+        // capslock
+
+        input.addEventListener('keyup', () => {
+            if (event.getModifierState("CapsLock")) {
+                capsWarning.classList.remove('d-none');
+            } else {
+                capsWarning.classList.add('d-none');
+            }
+        })
+
+        input.addEventListener("focusout", () => {
+            capsWarning.classList.add('d-none');
+        });
+
+        // functions
+
+        function updateTest() {
+            if (finished) {
+                input.removeAttribute('disabled');
+                resBox.style.display = 'none';
+                textBox.style.display = 'block';
+                showDonePercent.style.display = 'block';
+            }
+            newText = [],
+                inputText = [],
+                timeEnd = 60,
+                started = false,
+                finished = false,
+                timerInterval = null;
+
+            textBox.scrollTop = 0;
+
+            timerB.value = secondsToMMSS(60);
+
+            textBox.innerHTML = "";
+
+            if (isNotRandom) {
+                var strToArr = textFromP.split(" ");
+                for (let i = 0; i < strToArr.length; i++) {
+                    let span = document.createElement("span");
+                    span.innerText = strToArr[i];
+                    span.id = i;
+                    newText.push(strToArr[i]);
+                    textBox.append(span);
+                }
+            } else {
+                for (let i = 0; i < 50; i++) {
+                    addWordIntoBox();
+                }
+            }
+
+            updateSpan();
+
+            spanHeight = spans[0].offsetHeight + parseInt(mTop) * 2;
+
+            textBox.style.height = spanHeight * 2 + parseInt(tTop) * 2 + 'px';
+            spans[0].classList.add('active');
+        }
+
+        group.addEventListener('change', () => {
+            var groupId = group.options[group.selectedIndex].value;
+            location = 'index.php?groupId=' + groupId;
+        })
+
+        input.addEventListener('input', (e) => {
+            if (started === false) {
+                startTime();
+            }
+            let textInp = stReplaceUn(e.target.value),
+                ind = inputText.length;
+
+            var curNewText = stReplaceUn(newText[ind]);
+
+            if (curNewText.startsWith(textInp.trim())) {
+                spans[ind].classList.remove('wrongCur');
+            } else {
+                spans[ind].classList.add('wrongCur');
+            }
+            if (textInp.trim().length > 0 && textInp.search(" ") !== -1) {
+                inputText.push({ 'id': ind, 'text': textInp.trim(), 'pos': false });
+                var ifCon = (isNotRandom) ? newText.length === inputText.length : 0;
+                checkText(textInp.trim(), ind);
+                input.value = "";
+                if (ifCon) {
+                    ended(timerInterval);
+                }
+            } else if (textInp.trim().length === 0) {
+                input.value = "";
+            }
+        })
+
+        function addWordIntoBox() {
+            const random = Math.floor(Math.random() * wordsForTextBox.length);
+            if (lastRandomNumber == random) addWordIntoBox();
+            lastRandomNumber = random;
+            let span = document.createElement("span");
+            span.innerText = wordsForTextBox[random];
+            newText.push(wordsForTextBox[random]);
+            textBox.append(span);
+        }
+
+        function updateSpan() {
+            return spans = textBox.querySelectorAll('span'),
+                h = window.getComputedStyle(spans[0]),
+                mTop = h.getPropertyValue("margin-top"),
+                t = window.getComputedStyle(textBox),
+                tTop = t.getPropertyValue("padding-top");
+        }
+
+        function checkText(text = -1, index = -1) {
+            spans.forEach(span => span.classList.remove('active', 'wrongCur'));
+            if (stReplaceUn(newText[index]) === text) {
+                const updateObj = inputText.find(obj => obj.id === index);
+                if (updateObj) updateObj.pos = true;
+                spans[index].classList.add('correct');
+            } else if (text !== -1) {
+                spans[index].classList.add('wrong');
+            }
+            if (!isNotRandom) {
+                addWordIntoBox();
+                updateSpan();
+            }
+
+            if (spans[index + 1]) {
+                spans[index + 1].classList.add('active');
+                let indForT = (spans[index + 1].offsetTop - spans[0].offsetTop) / spanHeight;
+
+                textBox.scrollTop = spanHeight * indForT;
+            }
+            if (isNotRandom) {
+                donePercent = Math.round(inputText.length * 100 / newText.length);
+                writePercent(donePercent);
+            }
+        }
+
+        function stReplaceUn(text) {
+            return text.replace(/[\[\]\/\{\}\(\)\?\.\\\^\$\|]/g, "\\$&");
+        }
+
+        function startTime() {
+            started = true;
+            i = timeEnd;
+            timerB.value = secondsToMMSS(i);
+            timerInterval = setInterval(() => {
+                (isNotRandom) ? timeEnd++ : i--;
+                timerB.value = secondsToMMSS((isNotRandom) ? timeEnd : i);
+
+                if (!isNotRandom) {
+                    donePercent = 100 - Math.round(i * 100 / timeEnd);
+                    writePercent(donePercent);
+                }
+
+                var ifCon = (isNotRandom) ? 0 : i == 0;
+                if (ifCon) {
+                    ended(timerInterval);
+                }
+            }, 1000);
+        }
+
+        function writePercent(percent) {
+            showDonePercent.style.width = percent + "%";
+        }
+
+        function ended(timerInterval) {
+            finished = true;
+            input.setAttribute('disabled', '');
+            textBox.style.display = 'none';
+            showDonePercent.style.display = 'none';
+
+            let length = 0,
+                userid = 0,
+                wordAccNum = 0;
+
+            inputText.forEach(word => {
+                if (word.pos) {
+                    length += word.text.length;
+                    wordAccNum += 1;
+                }
+            });
+
+            accuracy = Math.round((wordAccNum * 100 / inputText.length)) ?? 0;
+            resultWPM = Math.round((length + inputText.length - 1) / 5 / timeEnd * 60);
+
+            resBox.style.display = 'block';
+            resNum.innerText = resultWPM >= 0 ? resultWPM : 0;
+            resAcc.innerText = accuracy ? accuracy : 0;
+            resTime.innerText = timeEnd;
+            resCor.innerText = wordAccNum;
+            resErr.innerText = inputText.length - wordAccNum;
+            input.value = "";
+
+            if (userid !== -1) {
+                if (accuracy >= 70 && resultWPM > 5 && !isCurLoading) {
+                    // query
+                    let xhr = new XMLHttpRequest();
+
+                    let formData = new URLSearchParams();
+                    formData.append("userid", userid);
+                    formData.append("speed", resultWPM);
+                    formData.append("accuracy", accuracy);
+                    formData.append("time", timeEnd);
+                    formData.append("groupId", groupId);
+
+                    xhr.open("POST", "queries/addRes.php", true);
+                    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xhr.send(formData);
+                    // query end
+                } else if (accuracy < 70) {
+                    alert("Aniqlik: " + accuracy + "% , sizning aniqligingiz 70% dan kam bo'lganligi sababli natijangiz saqlanmaydi");
+                }
+            }
+            clearInterval(timerInterval);
+        }
+
+        function secondsToMMSS(totalSeconds) {
+            let minutes = Math.floor(totalSeconds / 60);
+            let seconds = totalSeconds - minutes * 60;
+
+            // Padding the values to ensure they are two digits
+            if (minutes < 10) { minutes = "0" + minutes; }
+            if (seconds < 10) { seconds = "0" + seconds; }
+
+            return minutes + ':' + seconds;
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+</body>
+
+</html>
